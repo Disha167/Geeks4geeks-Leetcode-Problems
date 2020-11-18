@@ -67,4 +67,5 @@ int main(){
     for(ll i=1;i<=t;i++)solve(i);
 }
 
-
+//Credits:odd_even
+//Need Help!!Not able to figure out this digit dp clearly
