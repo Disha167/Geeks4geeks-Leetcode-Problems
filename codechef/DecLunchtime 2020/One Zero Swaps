@@ -1,0 +1,62 @@
+//We are instructed to swap Si with Sj such that Si='1' and Sj='0' and 1<i<j<n i.e. the changed 1 should
+//occur before changed 0. Instead of actually swapping we just count how many changed 0s are after changed 1s
+//i.e they form a pair. Changed here refers that s[i]!=p[i] because that is when we are required to swap.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        string s,p;
+        cin>>s>>p;
+        int chk_if_same_no=0;
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]!=p[i])
+            {
+                if(s[i]=='0')
+                chk_if_same_no++;
+                else
+                chk_if_same_no--;
+                
+            }
+        }
+        //if the number of changed ones and zeros are not equal so they cannot form a pair so we print No
+        if(chk_if_same_no!=0)
+        {
+        cout<<"No"<<endl;
+        continue;
+        }
+        int already_encountered_ones=0;
+        bool flag=true;
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]!=p[i])
+            {
+                if(s[i]=='0')
+                {
+                    if(already_encountered_ones<=0)
+                    {
+                       flag=false;
+                       break;
+                    }
+                    else
+                    already_encountered_ones--;
+                }
+                else
+                already_encountered_ones++;
+            }
+        }
+        if(flag==false)
+        cout<<"No"<<endl;
+        else
+        cout<<"Yes"<<endl;
+        
+    }
+	// your code goes here
+	return 0;
+}
