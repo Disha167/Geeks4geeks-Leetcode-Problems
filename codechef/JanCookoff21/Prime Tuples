@@ -1,0 +1,62 @@
+//key to observation here is that 2 is the only prime number that is even and the two minimum prime nos. are 2, 3 so the minimum sum obtained by adding two prime nos. will be 5
+//And, as in a+b=c, c will be a prime number so it has to be odd as if it will be even, it will becom divisible by 2.
+//For, c to be odd, one of the a or b should be even and other should be odd. And, a and b also has to be prime so if we take a as the even number, then a has to be 2 as there are
+//no other even prime no. So, the tuple becomes of the form(2,b,b+2)
+//Now, we only have to check whether b and b+2 are prime nos.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+unordered_set<int>primes;
+bool prime[1000001];
+void SieveOfEratosthenes()
+{
+  
+    memset(prime, true, sizeof(prime));
+ 
+    for (int p = 2; p * p <= 1000001; p++)
+    {
+        if (prime[p] == true) 
+        {
+            for (int i = p * p; i <= 1000001; i += p)
+                prime[i] = false;
+        }
+    }
+  
+}
+
+int ans[1000010];
+void precomputation()
+{
+    int count=0;
+for(int i=2;i<1000001;i++)
+{
+    if(prime[i]&&prime[i+2])
+    {
+        //cout<<i<<" "<<i+2<<endl;
+    count++;
+    }
+    ans[i+2]=count;
+}
+}
+void tests() {
+
+    int N;
+    cin>>N;
+ 
+  cout<<ans[N]<<endl;
+   
+
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	SieveOfEratosthenes();
+	precomputation();
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
