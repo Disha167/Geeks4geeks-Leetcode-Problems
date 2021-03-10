@@ -1,5 +1,6 @@
 //The only key here is observation to observe when key is greater to move left and when key is smaller to move down.We cover at most m cells of row and n cells of coloumn
 //starting from topmost right when the element is present in bottomost left, so the time complexity is O(m+n)
+//Every time when we move up or down , we reject a whole coloumn or row
   
   int matSearch (vector <vector <int>> &mat, int N, int M, int X)
 	{
