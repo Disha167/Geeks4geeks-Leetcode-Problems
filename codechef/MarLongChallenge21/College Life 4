@@ -1,0 +1,88 @@
+//Proud to implement it myself after a long time😎 😎 
+//We will fix the number of cakes as it requires both eggs and chocolates to be made and hence complexity of problem will be reduced and we calculate the price at each step,
+//and store the minimum of all and print it.
+//It will also cover the scenario where 0 cakes are used and items are completed by taking omelettes only and it gives cheaper prize so this approach covers all cases
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define mll long long int
+
+void tests() 
+{
+
+    mll N,E,H,A,B,C;
+    cin>>N>>E>>H>>A>>B>>C;
+    int flag=0;
+    mll min_price=LONG_MAX,no_of_items=0,curr_price=0;
+    for(mll i=0;i<=min(N,min(E,H));i++)
+    {
+        no_of_items=0;
+        curr_price=0;
+        mll no_of_cakes=min(N,i);
+        no_of_items=no_of_items+min(N,i);
+        curr_price+=(min(N,i)*C);
+        if(no_of_items==N)
+        flag=1;
+        if((no_of_items<N)&&(A<B))//we greedily check what to take next omelette or milkshake depending on what is less costlier
+        {
+            mll curr_item=min((N-no_of_items),((E-no_of_cakes)/2));
+            no_of_items=no_of_items+curr_item;
+            curr_price+=((curr_item)*A);
+            if(no_of_items==N)
+            {
+                min_price=min(min_price,curr_price);
+               // cout<<curr_price<<endl;
+                flag=1;
+               continue;
+            }
+             curr_item=min((N-no_of_items),((H-no_of_cakes)/3));//we subtract no_of_items from N as that items have already been made and that is reason of maintaining a variable
+                                                               //no_of_items
+            no_of_items=no_of_items+curr_item;
+            curr_price+=((curr_item)*B);
+        }
+        else if(no_of_items<N)
+        {
+            mll curr_item=min((N-no_of_items),((H-no_of_cakes)/3));//we take minimum of N-no_of_items and H-no_of_cakes/3 as we would have made greater number of cakes than 
+                                                                  //required and we subtract no_of_cakes from H as H i.e. some chocolates have already been used in making a cake
+            no_of_items=no_of_items+curr_item;
+            curr_price+=((curr_item)*B); 
+            if(no_of_items==N)
+            {
+                min_price=min(min_price,curr_price);
+               // cout<<curr_price<<endl;
+                flag=1;
+               continue;
+            }
+            curr_item=min((N-no_of_items),((E-no_of_cakes)/2));
+            no_of_items=no_of_items+curr_item;
+            curr_price+=((curr_item)*A);
+        }
+        if(no_of_items==N)
+        {
+            flag=1;
+       min_price=min(min_price,curr_price);
+        }
+    }
+    if(no_of_items==N)
+    {
+        flag=1;
+    min_price=min(min_price,curr_price);
+    } 
+  //  cout<<"ans ";
+    if(flag==1)
+    cout<<min_price<<endl;
+    else
+    cout<<-1<<endl;
+
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
