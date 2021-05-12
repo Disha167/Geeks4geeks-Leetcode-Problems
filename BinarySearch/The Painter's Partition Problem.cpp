@@ -41,13 +41,15 @@ class Solution
         int start=max_num;
         int end=sum;
         int result=-1;
+	//Now, we will perform binary search on maximum time taken by 1 painter, as we need to minimise it.
         while(start<=end)
         {
             int mid=start +(end-start)/2;
             if(isvalid(arr,n,k,mid))
             {
                 result=mid;
-                end=mid-1;//if it is valid, I optimise it further
+                end=mid-1;//As we have to minimise the total time taken by one painter, so once our mid becomes a valid candidate, then I optimise it further for improving on 
+		    //our capacity i.e. further minimising it
             }
             else
             start=mid+1;//if not valid, we increase the capacity of 1
