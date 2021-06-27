@@ -18,13 +18,13 @@ using namespace std;
 class Solution 
 {
     public:
-    void dfsHelper(vector<int>adj[],vector<int>&ans,int source, int visited[10005])
+    void dfsHelper(vector<int>adj[],vector<int>&ans,int source, vector<int>&visited)
     {
         visited[source]=1;
         ans.push_back(source);
         for(int x:adj[source])
         {
-            if(!visited[x])
+            if(!visited[x]) //we call through the first unvisited node without traversing through all adjacent at the same level
             {
                 dfsHelper(adj,ans,x,visited);
             }
@@ -36,7 +36,7 @@ class Solution
 	{
 	    vector<int>ans;
 	    int source=0;
-	    int visited[V+1]={0};
+	    vector<int>visited(V+1,0);
 	    dfsHelper(adj,ans,source,visited);
 	    return ans;
 	    // Code here
