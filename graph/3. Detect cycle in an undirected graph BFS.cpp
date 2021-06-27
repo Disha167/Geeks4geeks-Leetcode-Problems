@@ -22,7 +22,7 @@ class Solution
             q.pop();
             for(auto x:adj[tp.first])
             {
-                if(visited[x]&&x!=tp.second) //to make sure x is not the parent node like in case of 1--2--3 graph, 2 is visited again as a adjacent of 3, but
+                if(visited[x]&&x!=tp.second) // to make sure x is not the parent node like in case of 1--2--3 graph, 2 is visited again as a adjacent of 3, but
                   //that dosen't mean the graph has cycle so the parents are excluded. Here, parent of 3 is 2 and x=2 so we don't return true.
                     return true;
                 else if(!visited[x])
