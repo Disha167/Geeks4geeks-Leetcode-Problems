@@ -1,0 +1,73 @@
+//This is the second method of traversing the graph. Here we go depth by depth i.e. call through the first unvisited node & start exploring it's adjacent without
+//traversing all the nodes at same level first.
+//Eg:
+// 1---2
+// |   |  
+// 3---4--5
+//In the given graph, if we start from 1, then while looping through adjacent, we find 2 as unvisited so call dfs of 2, then instead of first going to 3, we go to
+//depth i.e. make dfs call for 4 mark it as visited, then loop through adjacent of 4 find 3, make dfs call for 3, then all adjacent nodes of 3 are already visited
+//so it returns function call to parent node 4, now 4 will check if any adjacent left, so call dfs for 5 mark it visited, then function call of 4 is over, it 
+//returns to 2, 2 do not have any unvisited node so return to 1 and then 1 returns to main function and dfs traversal 1 2 4 3 5 is printed.
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+class Solution 
+{
+    public:
+    void dfsHelper(vector<int>adj[],vector<int>&ans,int source, int visited[10005])
+    {
+        visited[source]=1;
+        ans.push_back(source);
+        for(int x:adj[source])
+        {
+            if(!visited[x])
+            {
+                dfsHelper(adj,ans,x,visited);
+            }
+        }
+        
+    }
+	//Function to return a list containing the DFS traversal of the graph.
+	vector<int>dfsOfGraph(int V, vector<int> adj[])
+	{
+	    vector<int>ans;
+	    int source=0;
+	    int visited[V+1]={0};
+	    dfsHelper(adj,ans,source,visited);
+	    return ans;
+	    // Code here
+	}
+};
+
+// { Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		int V, E;
+    	cin >> V >> E;
+
+    	vector<int> adj[V];
+
+    	for(int i = 0; i < E; i++)
+    	{
+    		int u, v;
+    		cin >> u >> v;
+    		adj[u].push_back(v);
+    		adj[v].push_back(u);
+    	}
+        // string s1;
+        // cin>>s1;
+        Solution obj;
+        vector<int>ans=obj.dfsOfGraph(V, adj);
+        for(int i=0;i<ans.size();i++){
+        	cout<<ans[i]<<" ";
+        }
+        cout<<endl;
+	}
+	return 0;
+}  // } Driver Code Ends
