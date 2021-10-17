@@ -1,7 +1,10 @@
 int solve(vector<int>& nums) {
     if(nums.empty())return 0;
  /*
-Ques me array kuch aise format ka hai ascending+x+ascending,aage se check krna hoga kahan tk ascending hai.. peeche se check krna hoga kahan tk descending hai fir har valid index ke liye dekho ki ascending wale portion ka last element descending wale portion ke first element se chhota hai ya ni
+Ques me array kuch aise format ka hai ascending+x+ascending,aage se check krna hoga kahan tk ascending hai.. peeche se check krna hoga kahan tk descending hai
+fir har valid index ke liye dekho ki ascending wale portion ka last element descending wale portion ke first element se chhota hai ya ni..
+Hume ascending aur descending wali condition aur nums[i]<=nums[j] wali condition alag alag check krni hogi kyunki ascending/descending me answer end-start
+aur nums[i]<=nums[j] me (jab middle se nikalenge) end-start-1
  One way of removing shortest sublist that is not in ascending order is joining to 2 sorted lists together.
  */ 
  /*
@@ -13,9 +16,11 @@ Ques me array kuch aise format ka hai ascending+x+ascending,aage se check krna h
  nums=[1,2,8,7,6,5,9]: the list is taken both from prefix and suffix 1,2,5,9 (sublist from middle is removed)
 
 LOGIC!!!!
- SO FOR THE FIRST TWO CASES WE HAVE TO KEEP ON INCREASING THE START POINTER UNTILL IT IS IN ASCENDING ORDER & KEEP ON DECREASING THE END POINTER UNTILL IT IS IN ASCENDING ORDER.
+ SO FOR THE FIRST TWO CASES WE HAVE TO KEEP ON INCREASING THE START POINTER UNTILL IT IS IN ASCENDING ORDER & KEEP ON DECREASING THE END POINTER UNTILL IT IS IN
+ ASCENDING ORDER.
  BUT,
- for third case , we have to check for every index whether nums[i]<=nums[j], if it is true then we increase i and try to minimise the answer but when it becomes false, we increase j to make the condition valid again.
+ for third case , we have to check for every index whether nums[i]<=nums[j], if it is true then we increase i and try to minimise the answer but when it 
+ becomes false, we increase j to make the condition valid again.
  */
 int start=0;
 while(start<=nums.size()-2&&nums[start]<=nums[start+1])
